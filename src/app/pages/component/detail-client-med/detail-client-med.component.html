@@ -1,0 +1,52 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+
+      <h4 class="card-title" align="center">Detail notification mise en demeure du client</h4>
+
+
+      <table *ngIf="notificationDeMiseEnDemeures" id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+          <th class="th-sm">DateNotification
+          </th>
+          <th class="th-sm">SoldeNotification
+          </th>
+          <th class="th-sm">StatusNotification
+          </th>
+          <th class="th-sm">DecisionNotification
+          </th>
+          <th class="th-sm">SoldeInitiale
+          </th>
+          <th class="th-sm">DateOctroie
+          </th>
+          <th class="th-sm">NumeroCompte
+          </th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr  *ngFor="let D of notificationDeMiseEnDemeures._embedded.notificationDeMiseEnDemeures">
+          <td>{{D.dateNotification }}</td>
+          <td>{{D.soldeNotification}}</td>
+          <td>{{D.statusNotification}}</td>
+          <td>{{D.decisionNotification}}</td>
+          <td>{{D.soldeInitiale}}</td>
+          <td>{{D.dateOctroie}}</td>
+          <td>{{D.numeroCompte}}</td>
+
+        </tr>
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+      </table>
+
+
+    </div>
+
+  </div>
+
+</div>

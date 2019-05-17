@@ -1,0 +1,299 @@
+   <div id="main-wrapper" class="fix-header card-no-border">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" [style.display]="isAuthentificated()?'block':'none'">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="./src/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img src="./src/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                         <!-- dark Logo text -->
+                         <img src="./src/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                         <!-- Light Logo text -->
+                         <img src="./src/assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+
+
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                     <ul class="navbar-nav my-lg-0">
+          <!-- ============================================================== -->
+          <!-- Comment -->
+          <!-- ============================================================== -->
+
+          <!-- ============================================================== -->
+          <!-- End Messages -->
+          <!-- ============================================================== -->
+
+          <!-- ============================================================== -->
+          <!-- Profile -->
+          <!-- ============================================================== -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+            <div class="dropdown-menu dropdown-menu-right scale-up">
+              <ul class="dropdown-user">
+                <li>
+                  <div class="dw-user-box">
+                    <div class="u-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
+                    <div class="u-text">
+                      <h4>Steave Jobs</h4>
+                      <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                  </div>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a (click)="onLogout()"><i class="fa fa-power-off"></i> Logout</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- ============================================================== -->
+          <!-- Language -->
+
+        </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar"  [style.display]="isAuthentificated()?'block':'none'">
+            <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- User profile -->
+            <div class="user-profile"  style="background: url(assets/images/background/user-info.jpg) no-repeat;">
+              <!-- User profile image -->
+              <div class="profile-img"> <img src="assets/images/users/1.jpg" alt="user" /> </div>
+              <!-- User profile text-->
+              <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span></a>
+                <div class="dropdown-menu animated flipInY">
+                  <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> Mon Profile</a>
+                  <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                  <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                  <div class="dropdown-divider"></div> <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Paramétre compte</a>
+                  <div class="dropdown-divider"></div> <a href="javascript:void(0)" class="dropdown-item"><i class="fa fa-power-off"></i> Déconnection</a>
+                </div>
+              </div>
+            </div>
+            <!-- End User profile text-->
+
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <ul id="sidebarnav">
+                <li class="nav-small-cap">Gestion de Recouvrement</li>
+                <li [style.display]="authService.isResponsableRecouvrement()?'block':'none'">
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Tableaux de bord</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="TableauDeBord1">Tableaux de bord 1</a></li>
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="TableauDeBordAdmin">TableauDeBordAdmin</a></li>
+                  </ul>
+                </li>
+                <li [style.display]="authService.isResponsableRecouvrement() || authService.isAgentRecouvrement()?'block':'none'">
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="icon icon-people"></i><span class="hide-menu">Gestion Clients</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="clients">ListeClient</a></li>
+                  </ul>
+                </li>
+                <li [style.display]="authService.isAgentRecouvrement()?'block':'none'">
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="icon icon-people"></i><span class="hide-menu">Gestion Huissier</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="huissiers">Liste des Huissiers</a></li>
+                  </ul>
+                </li>
+                <li [style.display]="authService.isAdmin()?'block':'none'">
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="icon icon-people"></i><span class="hide-menu">Gestion Utilisateur</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="accordion">Liste utilisateur</a></li>
+
+                  </ul>
+                </li>
+                <li [style.display]="authService.isResponsableRecouvrement() || authService.isAgentRecouvrement()?'block':'none'">
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="icon icon-wallet"></i><span class="hide-menu">Gestion Mise en <br/>demeure</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="fontawesome">Fontawesome</a></li>
+                  </ul>
+                </li>
+
+                <li>
+                  <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
+                  <ul aria-expanded="false" class="collapse">
+                    <li><a href="javascript:void(0)">item 1.1</a></li>
+                    <li>
+                      <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
+                      <ul aria-expanded="false" class="collapse">
+                        <li><a href="javascript:void(0)">item 1.3.1</a></li>
+                        <li><a href="javascript:void(0)">item 1.3.2</a></li>
+                        <li><a href="javascript:void(0)">item 1.3.3</a></li>
+                        <li><a href="javascript:void(0)">item 1.3.4</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">item 1.4</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+          <!-- Bottom points-->
+          <div class="sidebar-footer">
+            <!-- item-->
+            <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+            <!-- item-->
+            <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+            <!-- item-->
+            <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+          </div>
+            <!-- End Bottom points-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div [ngClass]="{'page-wrapper':isAuthentificated()}">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div [ngClass]="{'container-fluid':isAuthentificated()}">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles" [style.display]="isAuthentificated()?'block':'none'">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0"></h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/">Acceuil</a></li>
+
+                        </ol>
+                    </div>
+
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+              <router-outlet></router-outlet>
+                <!-- ============================================================== -->
+                <!-- End Page Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <div class="right-sidebar" [style.display]="isAuthentificated()?'block':'none'">
+                    <div class="slimscrollright">
+                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+                        <div class="r-panel-body">
+                            <ul id="themecolors" class="m-t-20">
+                                <li><b>With Light sidebar</b></li>
+                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
+                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
+                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
+                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
+                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
+                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
+                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
+                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
+                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
+                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
+                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
+                            </ul>
+                            <ul class="m-t-20 chatonline">
+                                <li><b>Chat option</b></li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"*ngIf="isAuthentificated()"> © COPYRIGHT 2019 BNM(Banque National De Mauritanie) </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>

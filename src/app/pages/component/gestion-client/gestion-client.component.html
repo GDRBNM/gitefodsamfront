@@ -1,0 +1,604 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+<!--
+        <h4 class="card-title">Ajout client</h4>
+        <div class="row button-group">
+          <div class="col-lg-3 col-md-3">
+            <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-block btn-lg btn-info" (click)="open(content)" (click)="ActivationFormePaticulier('particulier')">Ajout Particulier</button>
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <button type="button" class="btn btn-block btn-lg btn-success"  (click)="open(content)" data-target=".bs-example-modal-lg"(click)="ActivationFormeAssociation('association')">Ajout Association</button>
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <button type="button" class="btn btn-block btn-lg btn-primary" (click)="open(content)" data-target=".bs-example-modal-lg"(click)="ActivationFormeEntreprise('entreprise')">Ajout Entreprise</button>
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <button type="button" class="btn btn-block btn-lg btn-danger" (click)="open(content)" data-target=".bs-example-modal-lg"(click)="ActivationFormePartiePolitique('partiePolitique')">Partie Politique</button>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="card-body">
+        <h4 class="card-title" align="center">Gestion client</h4>
+-->
+        <!-- Nav tabs -->
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#particulier" (click)="tab('particulier')" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Particulier</span></a> </li>
+          <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#Association" (click)="tab('association')" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Association</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Entreprise" (click)="tab('entreprise')" role="tab"><span class="hidden-sm-up"><i class="ti-pencil"></i></span> <span class="hidden-xs-down">Entreprise</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#PartiePolitique" (click)="tab('partie')" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Partie Politique</span></a> </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tabcontent-border">
+
+          <div [ngClass]="pa?'tab-pane active':'tab-pane' " id="particulier" role="tabpanel">
+
+            <div class="m-t-40">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <div class="form-group">
+                    <button id="demo-btn-addrow" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormePaticulier('particulier')" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>Particulier
+                    </button>
+                    </div>
+                </div>
+                <div class="ml-auto">
+                  <div class="form-group">
+                    <input id="demo-input-search2" type="text" placeholder="Search" [(ngModel)]="ParticulierRecherche" name="search" autocomplete="off" (keyup)="OnSearchParticulier(ParticulierRecherche)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <table *ngIf="particuliers"class="table table-striped color-table success-table" cellspacing="0" width="100%">
+
+                <thead>
+              <tr>
+                <th>Numero Client</th>
+                <th class="th-sm">Nom
+                </th>
+                <th class="th-sm">Prenom
+                </th>
+                <th class="th-sm">Adresse
+                </th>
+                <th class="th-sm">Email
+                </th>
+                <th class="th-sm">Telephone
+                </th>
+                <th class="th-sm">Actif</th>
+                <th class="th-sm">Voir MED
+                </th>
+                <th class="th-sm">Action
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr  *ngFor="let p of particuliers._embedded.particuliers" >
+                <td>{{p.numClient}}</td>
+                <td>{{p.nom}}</td>
+                <td>{{p.prenom}}</td>
+                <td>{{p.adresse}}</td>
+                <td>{{p.email}}</td>
+                <td>{{p.tel}}</td>
+                <td>
+                  <div class="switch">
+                  <label>
+                    <input type="checkbox" [disabled]="!authService.isResponsableRecouvrement()" [checked]="p.actif" (click)="OnUpdateChangementStatusClients(p)"><span class="lever"></span></label>
+                </div>
+                </td>
+
+                <td (click)="getParticulierNotificationMiseEndemeure(p.id)" class="btn btn-primary btn-circle"><i class="fa fa-eye"></i></td>
+
+                <td>
+                  <span *ngIf="p.actif" class="btn btn-success btn-circle"  data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormePaticulierUpdate('particulier',p)"><i class="fa fa-edit"></i></span>
+                  <span *ngIf="p.actif" class="btn btn-info btn-circle" data-toggle="modal" (click)="onSelected(p)"  data-target="#responsive-modal" ><i class="fa fa-legal"></i></span>
+                </td>
+
+              </tr>
+              </tbody>
+              <tfoot>
+
+              </tfoot>
+            </table>
+            <nav aria-label="...">
+              <ul class="pagination" *ngIf="particuliers">
+                <li class="page-item " *ngIf="particuliers">
+                  <button class="page-link"  [disabled]="!particuliers._links.prev"  (click)="getPage(particuliers._links.prev.href)" tabindex="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">précédent</font></font></button>
+                </li>
+
+<!--
+                <input type="text" readonly name="totalpage" [ngModel]="totalpage" [value]="particuliers.page.totalPages">
+-->
+                <li class="page-item active" ><button disabled class="page-link"><font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">{{particuliers.page.number +1}}</font>
+                </font></button></li>
+
+
+
+                <li class="page-item" *ngIf="particuliers">
+                  <button class="page-link"  [disabled]="!particuliers._links.next" (click)="getPage(particuliers._links.next.href)"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suivant</font></font></button>
+                </li>
+              </ul>
+            </nav>
+
+
+
+
+
+
+          </div>
+
+          <div [ngClass]="ass? 'tab-pane active':'tab-pane'"  id="Association" role="tabpanel">
+            <div class="m-t-40">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <div class="form-group">
+                    <button id="demo-btn-addrow" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormeAssociation('association')" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>Association
+                    </button>
+                  </div>
+                </div>
+                <div class="ml-auto">
+                  <div class="form-group">
+                    <input id="demo-input-search2" type="text" placeholder="Search" [(ngModel)]="AssociationRecherche" name="search" autocomplete="off" (keyup)="OnSearchAssociation(AssociationRecherche)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <table *ngIf="associations" id="dtMaterialDesignExample"  class="table table-striped color-table success-table" cellspacing="0" width="100%">
+              <thead>
+              <tr>
+                <th class="th-sm">Numero Client
+                </th><th class="th-sm">Nom
+                </th>
+                <th class="th-sm">Recepisse
+                </th>
+                <th class="th-sm">Adresse
+                </th>
+                <th class="th-sm">Email
+                </th>
+                <th class="th-sm">Telephone
+                </th>
+                <th class="th-sm">Actif</th>
+                <th class="th-sm">Voir MED
+                </th>
+                <th class="th-sm">Action
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr  *ngFor="let A of associations._embedded.associations" >
+                <td>{{A.numClient}}</td>
+                <td>{{A.nom}}</td>
+                <td>{{A.recepisse}}</td>
+                <td>{{A.adresse}}</td>
+                <td>{{A.email}}</td>
+                <td>{{A.tel}}</td>
+                <td>
+                  <div class="switch">
+                    <label>
+                      <input type="checkbox" [checked]="A.actif" (click)="OnUpdateChangementStatusClients(A)"><span class="lever"></span></label>
+                  </div>
+                </td>
+                <td (click)="getParticulierNotificationMiseEndemeure(A.id)" class="btn btn-primary btn-circle"><i class="fa fa-eye"></i></td>
+                <td><span *ngIf="A.actif" class="btn btn-success btn-circle" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormeAssociationUpdate('association',A)"><i class="fa fa-edit"></i></span></td>
+              </tr>
+              </tbody>
+              <tfoot>
+
+              </tfoot>
+            </table>
+
+            <nav aria-label="...">
+              <ul class="pagination" *ngIf="associations">
+                <li class="page-item " *ngIf="associations">
+                  <button class="page-link"  [disabled]="!associations._links.prev"  (click)="getPageAssociation(associations._links.prev.href)" tabindex="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">précédent</font></font></button>
+                </li>
+
+                <!--
+                                <input type="text" readonly name="totalpage" [ngModel]="totalpage" [value]="particuliers.page.totalPages">
+                -->
+                <li class="page-item active" ><button disabled class="page-link"><font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">{{associations.page.number +1}}</font>
+                </font></button></li>
+
+
+
+                <li class="page-item" *ngIf="associations">
+                  <button class="page-link"  [disabled]="!associations._links.next" (click)="getPageAssociation(associations._links.next.href)"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suivant</font></font></button>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+
+          <div [ngClass]="entre? 'tab-pane active':'tab-pane'" id="Entreprise" role="tabpanel">
+            <div class="m-t-40">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <div class="form-group">
+                    <button id="demo-btn-addrow" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormeEntreprise('entreprise')" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>Entreprise
+                    </button>
+                  </div>
+                </div>
+                <div class="ml-auto">
+                  <div class="form-group">
+                    <input id="demo-input-search2" type="text" placeholder="Search" [(ngModel)]="EntrepriseRecherche" name="search" autocomplete="off" (keyup)="OnSearchEntreprise(EntrepriseRecherche)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <table *ngIf="entreprises"   class="table table-striped color-table success-table" cellspacing="0" width="100%">
+              <thead>
+              <tr>
+                <th class="th-sm">Numero Client
+                </th> <th class="th-sm">Nom
+                </th>
+                <th class="th-sm">NumeroEntreprise</th>
+                <th class="th-sm">raisonSociale
+                </th>
+                <th class="th-sm">Adresse
+                </th>
+                <th class="th-sm">Email
+                </th>
+                <th class="th-sm">Telephone
+                </th>
+                <th class="th-sm">Actif
+                </th>
+                <th class="th-sm">Voir MED
+                </th>
+                <th class="th-sm">Action
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr  *ngFor="let E of entreprises._embedded.entreprises" >
+                <td>{{E.numClient}}</td>
+                <td>{{E.nom}}</td>
+                <td>{{E.numero}}</td>
+                <td>{{E.raisonSociale}}</td>
+                <td>{{E.adresse}}</td>
+                <td>{{E.email}}</td>
+                <td>{{E.tel}}</td>
+                <td>
+                  <div class="switch">
+                    <label>
+                      <input type="checkbox" [checked]="E.actif" (click)="OnUpdateChangementStatusClients(E)"><span class="lever"></span></label>
+                  </div>
+                </td>
+                <td (click)="getParticulierNotificationMiseEndemeure(E.id)" class="btn btn-primary btn-circle"><i class="fa fa-eye"></i></td>
+                <td>
+                  <span *ngIf="E.actif" class="btn btn-success btn-circle" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormeEntrepriseUpdate('entreprise',E)"><i class="fa fa-edit"></i></span>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+
+              </tfoot>
+            </table>
+
+            <nav aria-label="...">
+              <ul class="pagination" *ngIf="entreprises">
+                <li class="page-item " *ngIf="entreprises">
+                  <button class="page-link"  [disabled]="!entreprises._links.prev"  (click)="getPageEntreprises(entreprises._links.prev.href)" tabindex="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">précédent</font></font></button>
+                </li>
+
+                <!--
+                                <input type="text" readonly name="totalpage" [ngModel]="totalpage" [value]="particuliers.page.totalPages">
+                -->
+                <li class="page-item active" ><button disabled class="page-link"><font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">{{entreprises.page.number +1}}</font>
+                </font></button></li>
+
+
+
+                <li class="page-item" *ngIf="entreprises">
+                  <button class="page-link"  [disabled]="!entreprises._links.next" (click)="getPageEntreprises(entreprises._links.next.href)"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suivant</font></font></button>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+
+          <div [ngClass]="partiepoli? 'tab-pane active':'tab-pane'" id="PartiePolitique" role="tabpanel">
+
+            <div class="m-t-40">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <div class="form-group">
+                    <button id="demo-btn-addrow" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormePartiePolitique('partiePolitique')" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>Partie Politique
+                    </button>
+                  </div>
+                </div>
+                <div class="ml-auto">
+                  <div class="form-group">
+                    <input id="demo-input-search2" type="text" placeholder="Search" [(ngModel)]="PartiePolitiqueRecherche" name="search" autocomplete="off" (keyup)="OnSearchPartiePolitique(PartiePolitiqueRecherche)">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <table *ngIf="partiPolitiques"   class="table table-striped color-table success-table" cellspacing="0" width="100%">
+              <thead>
+              <tr>
+
+                <th class="th-sm">Numero Client
+                </th>
+                <th class="th-sm">Nom
+                </th>
+                <th class="th-sm">Identification Partie
+                </th>
+                <th class="th-sm">Adresse
+                </th>
+                <th class="th-sm">Email
+                </th>
+                <th class="th-sm">Telephone
+                </th>
+                <th class="th-sm">Actif</th>
+                <th class="th-sm">Voir MED
+                </th>
+                <th class="th-sm">Action
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr  *ngFor="let PP of partiPolitiques._embedded.partiPolitiques" >
+                <td>{{PP.numClient}}</td>
+                <td>{{PP.nom}}</td>
+                <td>{{PP.idPartie}}</td>
+                <td>{{PP.adresse}}</td>
+                <td>{{PP.email}}</td>
+                <td>{{PP.tel}}</td>
+                <td>
+                  <div class="switch">
+                    <label>
+                      <input type="checkbox" [checked]="PP.actif" (click)="OnUpdateChangementStatusClients(PP)"><span class="lever"></span></label>
+                  </div>
+                </td>
+                <td (click)="getParticulierNotificationMiseEndemeure(PP.id)" class="btn btn-primary btn-circle"><i style="float: right" class="fa fa-eye"></i></td>
+
+                <td><span *ngIf="PP.actif" class="btn btn-success btn-circle" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="open(content)" (click)="ActivationFormePartiePolitiqueUpdate('partiePolitique',PP)"><i class="fa fa-edit"></i></span></td>
+
+              </tr>
+              </tbody>
+              <tfoot>
+
+              </tfoot>
+            </table>
+
+
+
+            <nav aria-label="...">
+              <ul class="pagination" *ngIf="partiPolitiques">
+                <li class="page-item" *ngIf="partiPolitiques">
+                  <button class="page-link"  [disabled]="!partiPolitiques._links.prev"  (click)="getPagePartiePolitique(partiPolitiques._links.prev.href)" tabindex="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">précédent</font></font></button>
+                </li>
+
+                <!--
+                                <input type="text" readonly name="totalpage" [ngModel]="totalpage" [value]="particuliers.page.totalPages">
+                -->
+                <li class="page-item active" ><button disabled class="page-link"><font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">{{partiPolitiques.page.number +1}}</font>
+                </font></button></li>
+
+
+
+                <li class="page-item" *ngIf="partiPolitiques">
+                  <button class="page-link"  [disabled]="!partiPolitiques._links.next" (click)="getPagePartiePolitique(partiPolitiques._links.next.href)"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suivant</font></font></button>
+                </li>
+              </ul>
+            </nav>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!----------- les modals---------------------------->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+  <div class="modal-body">
+
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+
+          <div class="card-body">
+
+            <form class="m-t-40" #f="ngForm" appIdentityRevealed (ngbButton)="onSaveClient(f.value)" (ngSubmit)="onSaveClient(f.value)" novalidate>
+              <div class="cross-validation" [class.cross-validation-error]="f.errors?.identityRevealed && (f.touched || f.dirty)">
+
+                <div class="form-group" *ngIf="ActivationChampId">
+                  <h5>ID <span class="text-danger">*</span></h5>
+                  <div class="controls">
+                    <input readonly type="text"  class="form-control" ngModel="{{id}}" name="id" required data-validation-required-message="This field is required"> </div>
+                  <div class="form-control-feedback"></div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormeAssociation || activationFormePaticulier || activationFormeEntreprise || activationFormePartiePolitique">
+                  <h5>numClient <span class="text-danger">*</span></h5>
+                  <div>
+                    <input type="text" class="form-control"  id="numClient" [(ngModel)]="NumClient" #numCl="ngModel" name="numClient" required minlength="2" > </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="numCl.invalid && (numCl.dirty || numCl.touched)"
+                         class="text text-danger">
+
+                      <div *ngIf="numCl.errors.required">
+                        Le numClient est obligatoire
+                      </div>
+                      <div *ngIf="numCl.errors.minlength">
+                        Le numClient doit avoir au minimum 2 characteres.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group" *ngIf="activationFormeAssociation || activationFormePaticulier || activationFormeEntreprise || activationFormePartiePolitique">
+                  <h5>Nom <span class="text-danger">*</span></h5>
+                  <div>
+                    <input type="text" class="form-control"  id="nom" [(ngModel)]="Nom" #nom="ngModel" name="nom" required minlength="2" > </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+                         class="text text-danger">
+
+                      <div *ngIf="nom.errors.required">
+                        Le nom est obligatoire
+                      </div>
+                      <div *ngIf="nom.errors.minlength">
+                        Le nom doit avoir au minimum 2 characteres.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormePartiePolitique">
+                  <h5>Identification Partie <span class="text-danger">*</span></h5>
+                  <div class="controls">
+                    <input type="text"  class="form-control" ngModel="{{IdPartie}}" name="idPartie" required data-validation-required-message="This field is required"> </div>
+                  <div class="form-control-feedback"></div>
+                </div>
+
+
+                <div class="form-group" *ngIf="activationFormeEntreprise">
+                  <h5>Raison Sociale<span class="text-danger">*</span></h5>
+                  <div class="controls">
+                    <input type="text" name="raisonSociale" ngModel="{{RaisonSociale}}" class="form-control" required data-validation-required-message="This field is required"> </div>
+                  <div class="form-control-feedback"></div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormePaticulier">
+                  <h5>Prenom<span class="text-danger">*</span></h5>
+                  <div class="controls">
+                    <input type="text" name="prenom" [(ngModel)]="Prenom" #prenom="ngModel" class="form-control" required minlength="4"> </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)"
+                         class="text text-danger">
+
+                      <div *ngIf="prenom.errors.required">
+                        Le prenom est obligatoire
+                      </div>
+                      <div *ngIf="prenom.errors.minlength">
+                        Le prnom doit etre au minimum 4 characteres.
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormeAssociation">
+                  <h5>Recepise<span class="text-danger">*</span></h5>
+                  <div class="controls">
+                    <input type="text" #recepisse="ngModel" name="recepisse" [(ngModel)]="Recepisse" class="form-control" required minlength="5"> </div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="recepisse.invalid && (recepisse.dirty || recepisse.touched)" class="text text-danger">
+                      <div *ngIf="recepisse.errors.required">Le recepisse est obligatoire</div>
+                      <div *ngIf="recepisse.errors.minlength">Le recepisse doit etre miminum 5 Characteres</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormeAssociation || activationFormePaticulier || activationFormeEntreprise || activationFormePartiePolitique">
+                  <h5>Adresse<span class="text-danger">*</span></h5>
+                  <input type="text" name="adresse" [(ngModel)]="Adresse" #adresse="ngModel" class="form-control" required minlength="4">
+
+                  <div class="form-control-feedback">
+                    <div *ngIf="adresse.invalid && (adresse.dirty || adresse.touched)"
+                         class="text text-danger">
+
+                      <div *ngIf="adresse.errors.required">
+                        L'adresse est obligatoire
+                      </div>
+                      <div *ngIf="adresse.errors.minlength">
+                        L'adresse doit etre au minimum 4 characteres.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="activationFormeAssociation || activationFormePaticulier || activationFormeEntreprise || activationFormePartiePolitique">
+                  <h5>Email  <span class="text-danger">*</span></h5>
+
+                  <input type="email" name="email" #email="ngModel" [(ngModel)]="Email"  class="form-control" email  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                  <div class="form-control-feedback">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                         class="text text-danger">
+                      <div *ngIf="email.errors.pattern">
+                        L'adresse mail est invalide.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group" *ngIf="activationFormeAssociation || activationFormePaticulier  || activationFormeEntreprise || activationFormePartiePolitique">
+                  <h5>Numero de telephone<span class="text-danger">*</span></h5>
+                  <div class="input-group">
+                    <input type="text" name="tel" [(ngModel)]="Telephone" #tel="ngModel"  class="form-control" required pattern="^[0-9]*$" minlength="8" maxlength="14"></div>
+                  <div class="form-control-feedback">
+                    <div *ngIf="tel.invalid && (tel.dirty || tel.touched)"
+                         class="text text-danger">
+                      <div *ngIf="tel.errors.required">
+                        Le numero de telephone est obligatoire.
+                      </div>
+                      <div *ngIf="tel.errors.pattern">
+                        Ne doit contenir que chiffre
+                      </div>
+                      <div *ngIf="tel.errors.minlength">
+                        Le numero de telephone doit au minimun 8 charactere.
+                      </div>
+                      <div *ngIf="tel.errors.maxlength">
+                        Le numero de telephone doit etre au maximun 14 charactere.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-xs-right">
+                <button type="submit" class="btn btn-info" [disabled]="!f.valid" id="apuis" (ngbButton)="modal.close('Save click')"> Enregistré</button>
+                <button type="reset" class="btn btn-danger">Annulé</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('close')">Fermer</button>
+  </div>
+  </div>
+</ng-template>
+<!----------- fin les modals---------------------------->
+
+<app-med-form [currentClient]="currentClient"></app-med-form>

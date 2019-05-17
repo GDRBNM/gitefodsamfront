@@ -1,0 +1,81 @@
+<!-- modal-->
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">{{operation}}  Huissier </h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitFrom()" [formGroup]="huissierForm">
+          <div [class.cross-validation-error]="huissierForm.errors?.identityRevealed && (huissierForm.touched ||huissierForm.dirty)" class="cross-validation">
+            <div class="form-group">
+              <label class="control-label" for="nom">Nom</label>
+             <input [(ngModel)]="huissier.nom" class="form-control" formControlName="nom" id="nom" required type="text">
+               <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+                class="text text-danger">
+
+            <div *ngIf="nom.errors.required">
+              le nom is obligatoire.
+            </div>
+            <div *ngIf="nom.errors.pattern">
+              nom ne pas contenir de chiffre
+            </div>
+          </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="prenom">Prenom</label>
+            <input [(ngModel)]="huissier.prenom" class="form-control" formControlName="prenom" id="prenom" required type="text">
+             <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)"
+              class="text text-danger">
+
+            <div *ngIf="prenom.errors.required">
+              prenom is obligatoire.
+            </div>
+            <div *ngIf="prenom.errors.pattern">
+              prenom ne pas contenir de chiffre
+            </div>
+          </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="email">email</label>
+            <input [(ngModel)]="huissier.email" class="form-control"  formControlName="email"  id="email" type="email">
+               <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="text text-danger">
+            <div *ngIf="email.errors.email">
+               email invalide
+            </div>
+          </div>
+        </div>
+
+          <div class="form-group">
+            <label class="control-label" for="adresse" >adresse</label>
+            <input [(ngModel)]="huissier.adresse" class="form-control" formControlName="adresse"  id="adresse" required  type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="tel">tel</label>
+            <input [(ngModel)]="huissier.tel" class="form-control"  formControlName="tel"  id="tel" required type="tel">
+            <div *ngIf="tel.invalid && (tel.dirty || tel.touched)"class="text text-danger">
+
+            <div *ngIf="tel.errors.required">
+              le numero de telephone est obligatoire.
+            </div>
+            <div *ngIf="tel.errors.pattern">
+              le numero de telephone ne pas contenir de lettre
+            </div>
+              <div *ngIf="tel.errors.minlength">
+                le numero de telephone ne pas contenir moins de 8 chiffres
+              </div>
+          </div>
+            </div>
+            </div>
+          <button [style.display]="huissierForm.invalid?'none':'block'" class="btn btn-success" type="submit">{{operation}}</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button aria-hidden="true" class="bnt btn-danger" data-dismiss="modal" type="button">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Liste des Huissier</h4>
+    <h6 class="card-subtitle"></h6>
+    <div class="m-t-40">
+      <div class="d-flex">
+        <div class="mr-auto">
+          <div class="form-group">
+            <button id="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#responsive-modal" (click)="onAjouter()">
+              <i class="fa fa-plus" area-hidden="true" ></i> Ajouter
+            </button>
+            <small>.</small> </div>
+        </div>
+        <div class="ml-auto">
+          <div class="form-group">
+             <input id="demo-input-search2" [(ngModel)]="motClet" type="text" placeholder="Recherche" autocomplete="on" (keyup)="Onsearch(motClet)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+    <table  class="table table-striped color-bordered-table success-bordered-table">
+      <thead>
+      <tr>
+        <th>nom</th>
+        <th data-hide="phone, tablet">prenom</th>
+        <th data-hide="phone, tablet">email</th>
+        <th data-hide="phone, tablet">adresse</th>
+        <th data-hide="phone, tablet">tel</th>
+        <th>Status</th>
+        <th data-sort-ignore="true" class="min-width">action</th>
+      </tr>
+      </thead>
+
+      <tbody *ngIf="huissiers">
+      <tr *ngFor="let h of huissiers._embedded.huissiers">
+        <td>{{h.nom}}</td>
+        <td>{{h.prenom}}</td>
+        <td>{{h.email}}</td>
+        <td>{{h.adresse}}</td>
+        <td>{{h.tel}}</td>
+        <td >
+          <div class="switch">
+            <label>
+              <input type="checkbox" [disabled]="!auth.isResponsableRecouvrement()" [checked]="h.active" (click)="onStatus(h)"><span class="lever"></span></label>
+          </div>
+        </td>
+        <td>
+          <button *ngIf="h.active" (click)="onUpdate(h)" type="button" class="btn btn-warning btn-circle " data-toggle="tooltip" data-original-title="Modifier" data-toggle="modal" data-target="#responsive-modal">
+          <i class="fa fa-edit" aria-hidden="true" ></i>
+          </button>
+          <button (click)="onShow(h)" type="button" class="btn btn-circle btn-success" data-toggle="tooltip" data-original-title="voir le detail"><i class="fa fa-eye" aria-hidden="true"></i></button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot >
+      </tfoot>
+    </table>
+    </div>
+    <nav aria-label="..." *ngIf="huissiers">
+      <ul class="pagination"  *ngIf="huissiers._embedded.huissiers.length !=0">
+        <li class="page-item" *ngIf="huissiers">
+          <button class="page-link"   [disabled]="!huissiers._links.prev" (click)="getPage(huissiers._links.prev.href)"><< </button>
+        </li>
+        <li class="page-item active">
+          <button class="page-link"  disabled>{{huissiers.page.number +1}}</button>
+        </li>
+        <li class="page-item" *ngIf="huissiers">
+          <button class="page-link"   [disabled]="!huissiers._links.next" (click)="getPage(huissiers._links.next.href)" >>></button>
+        </li>
+      </ul>
+    </nav>
+
+</div>
+</div>
+
+<app-huissie-form [curentHuissier]="hussierSuject" [operation]="operation"> </app-huissie-form>
+
