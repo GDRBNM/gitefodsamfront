@@ -59,7 +59,7 @@
             </div>
 
             <div class="form-group col-md-6 m-t-20">
-              <input type="file" class="form-control form-control-line" id="input2" name="file" ngModel="">
+              <input type="file" class="form-control form-control-line" id="input2" name="file" ngModel="" (change)="onSelectedFile($event)">
               <span class="help-block"><small>uploader un document</small></span>
             </div>
 
