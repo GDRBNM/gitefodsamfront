@@ -1,51 +1,55 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title" align="center">Liste notification mise en demeure du client</h4>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-
-      <h4 class="card-title" align="center">Detail notification mise en demeure du client</h4>
-
-
-      <table *ngIf="notificationDeMiseEnDemeures" id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
-        <thead>
-        <tr>
-          <th class="th-sm">DateNotification
-          </th>
-          <th class="th-sm">SoldeNotification
-          </th>
-          <th class="th-sm">StatusNotification
-          </th>
-          <th class="th-sm">DecisionNotification
-          </th>
-          <th class="th-sm">SoldeInitiale
-          </th>
-          <th class="th-sm">DateOctroie
-          </th>
-          <th class="th-sm">NumeroCompte
-          </th>
-
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr  *ngFor="let D of notificationDeMiseEnDemeures._embedded.notificationDeMiseEnDemeures">
-          <td>{{D.dateNotification }}</td>
-          <td>{{D.soldeNotification}}</td>
-          <td>{{D.statusNotification}}</td>
-          <td>{{D.decisionNotification}}</td>
-          <td>{{D.soldeInitiale}}</td>
-          <td>{{D.dateOctroie}}</td>
-          <td>{{D.numeroCompte}}</td>
-
-        </tr>
-        </tbody>
-        <tfoot>
-
-        </tfoot>
-      </table>
+    <h6 class="card-subtitle">Detail de notifications de mise en demeure</h6>
 
 
-    </div>
+    <table *ngIf="notificationDeMiseEnDemeures" id="dtMaterialDesignExample"
+           class="table table-striped color-bordered-table success-bordered-table" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th class="th-sm">Date
+        </th>
+        <th class="th-sm">Solde
+        </th>
+        <th class="th-sm">Status
+        </th>
+        <th class="th-sm">Decision
+        </th>
+        <th class="th-sm">SoldeInitiale
+        </th>
+        <th class="th-sm">DateOctroie
+        </th>
+        <th class="th-sm">NumeroCompte
+        </th>
+        <th>Action</th>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let D of notificationDeMiseEnDemeures._embedded.notificationDeMiseEnDemeures">
+        <td>{{D.dateNotification |date}}</td>
+        <td>{{D.soldeNotification}}</td>
+        <td *ngIf="D.statusNotification"><i class="fa fa-circle" style="color: #00a300;"></i></td>
+        <td *ngIf="!D.statusNotification"><i class="fa fa-circle " style="color: #9f191f;"></i></td>
+        <td>{{D.decisionNotification}}</td>
+        <td>{{D.soldeInitiale}}</td>
+        <td>{{D.dateOctroie}}</td>
+        <td>{{D.numeroCompte}}</td>
+        <td>
+          <span class="btn btn-success btn-circle" data-target=".bs-example-modal-lg"><i class="fa fa-edit"></i></span>
+          <span class="btn btn-info btn-circle" data-toggle="modal" data-target="#responsive-modal"><i
+            class="fa fa-eye"></i></span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+
+      </tfoot>
+    </table>
+
 
   </div>
 

@@ -30,6 +30,9 @@ import {GestionHuissierService} from "../services/gestion-huissier.service";
 import {DashbordAdminService} from "../services/Dashboard-admin-service";
 import {MEDFORMComponent} from "./pages/component/med-form/med-form.component";
 import {NotificationDeMEDService} from "../services/notificationDeMEDService";
+import { GestionMedComponent } from './pages/component/gestion-med/gestion-med.component';
+import {GestionMed} from "../services/gestion-med";
+import {PdfViewerModule} from "ng2-pdf-viewer";
 
 //import {MatButtonModule, MatCheckboxModule } from '@angular/cdk';
 @NgModule({
@@ -47,7 +50,8 @@ import {NotificationDeMEDService} from "../services/notificationDeMEDService";
     StarterComponent,
     IdentityRevealedValidatorDirective,
     TableauDeBordAdminComponent,
-    MEDFORMComponent
+    MEDFORMComponent,
+    GestionMedComponent
 
 
   ],
@@ -59,7 +63,7 @@ import {NotificationDeMEDService} from "../services/notificationDeMEDService";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgbModule,
-  // MatButtonModule, MatCheckboxModule,
+    PdfViewerModule,
     DataTablesModule,
     ToastrModule.forRoot({timeOut:3000,progressBar:true,progressAnimation:'increasing'}),
   ],
@@ -72,6 +76,7 @@ import {NotificationDeMEDService} from "../services/notificationDeMEDService";
     GestionClientService,
     DashbordAdminService,
     NotificationDeMEDService,
+    GestionMed,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorJwtService, multi: true}
     ,NgbModule
   ],
