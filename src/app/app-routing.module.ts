@@ -10,6 +10,7 @@ import {StarterComponent} from "./pages/component/starter/starter.component";
 import {AgentGuardService} from "../services/agent-guard.service";
 import {TableauDeBordAdminComponent} from "./pages/component/tableau-de-bord-admin/tableau-de-bord-admin.component";
 import {GestionHuissierComponent} from "./pages/component/gestion-huissier/gestion-huissier.component";
+import {GestionMedComponent} from "./pages/component/gestion-med/gestion-med.component";
 
 const routes: Routes = [
   {path:"login",component:LoginComponent,canActivate:[LoginGuardService]},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'clients/:id/notificationDeMiseEnDemeures',component:DetailClientMedComponent},
   {path:"TableauDeBordAdmin",component:TableauDeBordAdminComponent},
   {path:'TableauDeBord1',component:StarterComponent},
+  {path:'med',component:GestionMedComponent},
   {path: '',component:StarterComponent,canActivate:[AuthGuardService]},
   {path:'huissiers',component:GestionHuissierComponent ,canActivate:[AuthGuardService,AgentGuardService]},
   {path:'**',redirectTo:'/'}

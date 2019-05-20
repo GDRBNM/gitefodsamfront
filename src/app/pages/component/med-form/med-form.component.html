@@ -15,74 +15,74 @@
           <h6 class="card-subtitle"></h6>
 
           <div class="cross-validation" [class.cross-validation-error]="f.errors?.identityRevealed && (f.touched || f.dirty)">
-            <form class="floating-labels m-t-40 row" #f="ngForm" (submit)="onAjouterNotif(f.value)" id="formulaireMED" enctype="multipart/form-data">
+          <form class="floating-labels m-t-40 row" #f="ngForm" (submit)="onAjouterNotif(f.value)" id="formulaireMED" enctype="multipart/form-data">
 
-              <div class="form-group col-md-6 m-t-20">
-                <input type="text" class="form-control form-control-line" id="input8" name="numeroCompte" #NumCompte="ngModel" ngModel="" required >
-                <span class="bar"></span>
-                <label for="input8">Numero Compte</label>
-                <div *ngIf="NumCompte.invalid && (NumCompte.dirty || NumCompte.touched)"
-                     class="text text-danger">
-                  <div *ngIf="NumCompte.errors.required">
-                    <span class="help-block"><small>Le num de compte  est obligatoire.</small></span>
-                  </div>
-
+            <div class="form-group col-md-6 m-t-20">
+              <input type="text" class="form-control form-control-line" id="input8" name="numeroCompte" #NumCompte="ngModel" ngModel="" required >
+              <span class="bar"></span>
+              <label for="input8">Numero Compte</label>
+              <div *ngIf="NumCompte.invalid && (NumCompte.dirty || NumCompte.touched)"
+                   class="text text-danger">
+                <div *ngIf="NumCompte.errors.required">
+                  <span class="help-block"><small>Le num de compte  est obligatoire.</small></span>
                 </div>
 
               </div>
 
-              <div class="form-group col-md-6 m-t-20">
-                <input type="number" class="form-control form-control-line" id="input1" name="soldeInitiale" #SoldeInitial="ngModel" ngModel="" required min="0">
-                <span class="bar"></span>
-                <label for="input1">Solde Initiale</label>
-                <div *ngIf="SoldeInitial.invalid && (SoldeInitial.dirty || SoldeInitial.touched)"
-                     class="text text-danger">
-                  <div *ngIf="SoldeInitial.errors.required">
-                    <span class="help-block"><small>Le Solde Initial est obligatoire.</small></span>
-                  </div>
-                </div>
+            </div>
 
-              </div>
-
-
-              <div class="form-group col-md-6 m-t-20">
-                <input type="number" class="form-control form-control-line" id="input2j" #soldeNotif="ngModel" required name="soldeNotification" ngModel="">
-                <span class="bar"></span>
-                <label for="input2">Solde Notification</label>
-
-                <div *ngIf="soldeNotif.invalid && (soldeNotif.dirty || soldeNotif.touched)"
-                     class="text text-danger">
-                  <div *ngIf="soldeNotif.errors.required">
-                    <span class="help-block"><small>Le Solde Notification est obligatoire.</small></span>
-                  </div>
+            <div class="form-group col-md-6 m-t-20">
+              <input type="number" class="form-control form-control-line" id="input1" name="soldeInitiale" #SoldeInitial="ngModel" ngModel="" required min="0">
+              <span class="bar"></span>
+              <label for="input1">Solde Initiale</label>
+              <div *ngIf="SoldeInitial.invalid && (SoldeInitial.dirty || SoldeInitial.touched)"
+                   class="text text-danger">
+                <div *ngIf="SoldeInitial.errors.required">
+                  <span class="help-block"><small>Le Solde Initial est obligatoire.</small></span>
                 </div>
               </div>
 
-              <div class="form-group col-md-6 m-t-20">
-                <input type="file" class="form-control form-control-line" id="input2" name="file" ngModel="" (change)="onSelectedFile($event)">
-                <span class="help-block"><small>uploader un document</small></span>
-              </div>
+            </div>
 
-              <div class="form-group col-md-6 m-t-20">
-                <input type="date" class="form-control" id="input3" name="dateOctroie" ngModel="" #dateoctroie="ngModel" required>
-                <div *ngIf="dateoctroie.invalid && (dateoctroie.dirty || dateoctroie.touched)"
-                     class="text text-danger">
-                  <div *ngIf="dateoctroie.errors.required">
-                    <span class="help-block"><small>La date d'octroie est obligatoire.</small></span>
-                  </div>
+
+            <div class="form-group col-md-6 m-t-20">
+              <input type="number" class="form-control form-control-line" id="input2j" #soldeNotif="ngModel" required name="soldeNotification" ngModel="">
+              <span class="bar"></span>
+              <label for="input2">Solde Notification</label>
+
+              <div *ngIf="soldeNotif.invalid && (soldeNotif.dirty || soldeNotif.touched)"
+                   class="text text-danger">
+                <div *ngIf="soldeNotif.errors.required">
+                  <span class="help-block"><small>Le Solde Notification est obligatoire.</small></span>
                 </div>
               </div>
+            </div>
 
+            <div class="form-group col-md-6 m-t-20">
+              <input type="file" class="form-control form-control-line" id="input2" name="file" ngModel="" (change)="onSelectedFile($event)">
+              <span class="help-block"><small>uploader un document</small></span>
+            </div>
 
-              <div class="form-group col-md-6 m-t-20">
-                <select class="form-control p-0" id="input6" *ngIf="Huissier" name="huissier" ngModel="" #huissie="ngModel" required>
-                  <option disabled value="Seletione huissier">Seletione huissier</option>
-                  <option *ngFor="let h of Huissier._embedded.huissiers" value="{{h.id}}">{{h.nom}}</option>
-                </select>
-
+            <div class="form-group col-md-6 m-t-20">
+              <input type="date" class="form-control" id="input3" name="dateOctroie" ngModel="" #dateoctroie="ngModel" required>
+              <div *ngIf="dateoctroie.invalid && (dateoctroie.dirty || dateoctroie.touched)"
+                   class="text text-danger">
+                <div *ngIf="dateoctroie.errors.required">
+                  <span class="help-block"><small>La date d'octroie est obligatoire.</small></span>
+                </div>
               </div>
-              <button type="submit" [disabled]="f.invalid" class="btn btn-success" id="reset">Ajouter</button>
-            </form>
+            </div>
+
+
+            <div class="form-group col-md-6 m-t-20">
+              <select class="form-control p-0" id="input6" *ngIf="Huissier" name="huissier" ngModel="" #huissie="ngModel" required>
+                <option disabled value="Seletione huissier">Seletione huissier</option>
+                <option *ngFor="let h of Huissier._embedded.huissiers" value="{{h.id}}">{{h.nom}}</option>
+              </select>
+
+            </div>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-success" id="reset">Ajouter</button>
+          </form>
 
           </div>
         </div>
